@@ -1,11 +1,8 @@
 package com.khoale.hlcards.Controller;
 
-import com.khoale.hlcards.entity.Cards;
-import com.khoale.hlcards.entity.Players;
-import com.khoale.hlcards.repository.PlayerRepo;
+import com.khoale.hlcards.Entity.Players;
+import com.khoale.hlcards.Repository.PlayerRepo;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/players")

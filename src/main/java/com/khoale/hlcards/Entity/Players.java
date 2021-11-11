@@ -1,4 +1,4 @@
-package com.khoale.hlcards.entity;
+package com.khoale.hlcards.Entity;
 
 import javax.persistence.*;
 import java.util.Set;

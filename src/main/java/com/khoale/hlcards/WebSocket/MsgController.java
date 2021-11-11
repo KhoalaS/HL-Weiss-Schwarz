@@ -12,6 +12,7 @@ public class MsgController {
     @SendTo("/topic/response")
     public StompResponse response(StompMessage message) throws Exception{
         Thread.sleep(1000);
+
         return new StompResponse("Hello"+ HtmlUtils.htmlEscape(message.getName())+"!");
     }
 }

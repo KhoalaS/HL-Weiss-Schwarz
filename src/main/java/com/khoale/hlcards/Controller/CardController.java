@@ -1,9 +1,13 @@
 package com.khoale.hlcards.Controller;
 
-import com.khoale.hlcards.entity.Cards;
-import com.khoale.hlcards.repository.CardRepo;
+import com.khoale.hlcards.Entity.Cards;
+import com.khoale.hlcards.Repository.CardRepo;
+import com.khoale.hlcards.WebSocket.StompResponse;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
 
 @RestController
 @RequestMapping("/cards")
@@ -15,7 +19,14 @@ public class CardController {
         this.cardRepo = cardRepo;
     }
 
-    public void insertCard(){
+    /*public void insertCard(){
         cardRepo.save(new Cards("Guwa","asdas.png","SSR"));
+    }*/
+
+    @MessageMapping("/hello2")
+    @SendTo("/topic/res")
+    public StompResponse testBTN(){
+        String val=cardRepo.getRandomSSP();
+        return new StompResponse(val);
     }
 }
