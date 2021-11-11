@@ -2,7 +2,7 @@ package com.khoale.hlcards.Logic;
 
 public class PackOpening {
 
-    public static String pull_Foil(){
+    public String pull_Foil(){
 
         double prob = Math.random();
 
@@ -24,13 +24,6 @@ public class PackOpening {
         }else{
             return "U";
         }
-    }
-
-    public static void main(String[] args) {
-        for(int i = 0; i<20; i++){
-            System.out.println(pull_Foil());
-        }
-
     }
 
 }
