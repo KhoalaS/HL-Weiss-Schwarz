@@ -2,6 +2,7 @@ package com.khoale.hlcards.Controller;
 
 import com.khoale.hlcards.Entity.Cards;
 import com.khoale.hlcards.Repository.CardRepo;
+import com.khoale.hlcards.WebSocket.StompMessage;
 import com.khoale.hlcards.WebSocket.StompResponse;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -19,13 +20,9 @@ public class CardController {
         this.cardRepo = cardRepo;
     }
 
-    /*public void insertCard(){
-        cardRepo.save(new Cards("Guwa","asdas.png","SSR"));
-    }*/
-
-    @MessageMapping("/hello2")
-    @SendTo("/topic/res")
-    public StompResponse testBTN(){
+    @MessageMapping("/pull")
+    @SendTo("/topic/result")
+    public StompResponse testBTN(StompMessage message){
         String val=cardRepo.getRandomSSP();
         return new StompResponse(val);
     }
