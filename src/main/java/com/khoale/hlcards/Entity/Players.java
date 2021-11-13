@@ -9,6 +9,7 @@ public class Players {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
 
+    @Column(unique = true)
     private String email;
 
     private String pw;
