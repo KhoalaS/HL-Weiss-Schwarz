@@ -56,4 +56,8 @@ public class Cards {
         this.png = png;
         this.rarity = rarity;
     }
+
+    @Override
+    public String toString() {
+        return "Cards{" + "id=" + this.getId() + ", idol=" + this.getIdol() + ", png=" + this.getPng() + ", rarity=" + this.getRarity(); }
 }

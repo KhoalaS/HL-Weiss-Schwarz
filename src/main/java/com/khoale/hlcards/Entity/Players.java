@@ -62,4 +62,14 @@ public class Players {
         this.pw = pw;
         this.currency = currency;
     }
+
+    @Override
+    public String toString() {
+        return "{\"Players\":{"
+                + "\"uid\":\"" + uid + "\""
+                + ", \"email\":\"" + email + "\""
+                + ", \"pw\":\"" + pw + "\""
+                + ", \"currency\":\"" + currency + "\""
+                + "}}";
+    }
 }
