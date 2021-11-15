@@ -23,10 +23,8 @@ public class CardController {
     }
 
     @GetMapping("/booster")
-    public Cards booster( ){
-        List<Object[]> cardsList= cardRepo.getRandom_R();
-        Object[] card = cardsList.get(0);
-        return new Cards((Integer) card[0],(String) card[1],(String) card[2],(String) card[3]);
+    public List<Cards> booster( ){
+        return cardRepo.openBooster(pull_Foil());
     }
 
     @GetMapping("/cards/{id}")
