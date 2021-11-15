@@ -1,21 +1,47 @@
 package com.khoale.hlcards.Controller;
 
+import com.khoale.hlcards.Entity.Cards;
 import com.khoale.hlcards.Repository.CardRepo;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/cards")
 public class CardController {
 
     private CardRepo cardRepo;
 
     public CardController(CardRepo cardRepo){
         this.cardRepo = cardRepo;
+    }
+
+    @GetMapping("/cards")
+    public List<Cards>all(){
+        return cardRepo.findAll();
+    }
+
+    @GetMapping("/booster")
+    public Cards booster( ){
+        List<Object[]> cardsList= cardRepo.getRandom_R();
+        Object[] card = cardsList.get(0);
+        return new Cards((Integer) card[0],(String) card[1],(String) card[2],(String) card[3]);
+    }
+
+    @GetMapping("/cards/{id}")
+    public Cards replaceCard(@RequestBody Cards newCard, @PathVariable Integer id){
+        return cardRepo.findById(id)
+                .map(card -> {
+                    card.setIdol(newCard.getIdol());
+                    card.setPng(newCard.getPng());
+                    card.setRarity(newCard.getRarity());
+                    return cardRepo.save(card);
+                })
+                .orElseGet(()->{
+                    newCard.setId(id);
+                    return cardRepo.save(newCard);
+                });
     }
 
 

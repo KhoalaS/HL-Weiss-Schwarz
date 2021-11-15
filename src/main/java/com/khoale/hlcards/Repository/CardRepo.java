@@ -24,8 +24,8 @@ public interface CardRepo extends JpaRepository<Cards, Integer> {
     @Query(value="SELECT png FROM cards WHERE rarity='U' ORDER BY RAND () LIMIT 2", nativeQuery = true)
     List<String> getRandom_U();
 
-    @Query(value="SELECT png FROM cards WHERE rarity='R' ORDER BY RAND () LIMIT 1", nativeQuery = true)
-    String getRandom_R();
+    @Query(value="SELECT * FROM cards WHERE rarity='R' ORDER BY RAND () LIMIT 1", nativeQuery = true)
+    List<Object[]> getRandom_R();
 
     @Query(value="SELECT png FROM cards WHERE rarity=rar ORDER BY RAND () LIMIT 1", nativeQuery = true)
     String getRandom_Foil(
@@ -33,16 +33,13 @@ public interface CardRepo extends JpaRepository<Cards, Integer> {
     );
 
     @Query(value =
-            "(SELECT png FROM cards WHERE rarity='C' ORDER BY RAND () LIMIT 4) UNION ALL" +
-            "(SELECT png FROM cards WHERE rarity='U' ORDER BY RAND () LIMIT 2) UNION ALL" +
-            "(SELECT png FROM cards WHERE rarity='R' ORDER BY RAND () LIMIT 1) UNION ALL" +
-            "(SELECT png FROM cards WHERE rarity= :rar ORDER BY RAND () LIMIT 1)", nativeQuery = true
+            "(SELECT * FROM cards WHERE rarity='C' ORDER BY RAND () LIMIT 4) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity='U' ORDER BY RAND () LIMIT 2) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity='R' ORDER BY RAND () LIMIT 1) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity= :rar ORDER BY RAND () LIMIT 1)", nativeQuery = true
     )
-    List<String> openBooster(
+    List<Object[]> openBooster(
             @Param("rar") String rar
     );
-
-
-
 
 }

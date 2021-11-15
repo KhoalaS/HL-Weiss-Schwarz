@@ -63,6 +63,10 @@ public class Players {
         this.currency = currency;
     }
 
+    public Players(){
+
+    }
+
     @Override
     public String toString() {
         return "{\"Players\":{"

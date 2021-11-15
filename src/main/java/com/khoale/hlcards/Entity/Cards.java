@@ -51,13 +51,22 @@ public class Cards {
         this.rarity = rarity;
     }
 
-    public Cards(String idol, String png, String rarity) {
+    public Cards(Integer id, String idol, String png, String rarity) {
+        this.id = id;
         this.idol = idol;
         this.png = png;
         this.rarity = rarity;
     }
 
+    public Cards(){}
+
     @Override
     public String toString() {
-        return "Cards{" + "id=" + this.getId() + ", idol=" + this.getIdol() + ", png=" + this.getPng() + ", rarity=" + this.getRarity(); }
+        return "{\"Cards\":{"
+                + "\"id\":\"" + id + "\""
+                + ", \"idol\":\"" + idol + "\""
+                + ", \"png\":\"" + png + "\""
+                + ", \"rarity\":\"" + rarity + "\""
+                + "}}";
+    }
 }
