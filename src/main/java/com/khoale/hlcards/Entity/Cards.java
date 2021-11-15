@@ -16,7 +16,7 @@ public class Cards {
     private String rarity;
 
     @ManyToMany(mappedBy = "cards")
-    Set<Players> players;
+    Set<User> players;
 
 
     public Integer getId() {

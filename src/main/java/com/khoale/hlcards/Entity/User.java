@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Players {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
@@ -19,7 +19,7 @@ public class Players {
     @ManyToMany
     @JoinTable(
             name = "player_deck",
-            joinColumns = @JoinColumn(name = "player_ID"),
+            joinColumns = @JoinColumn(name = "user_ID"),
             inverseJoinColumns = @JoinColumn(name = "card_ID")
     )
     Set<Cards> cards;
@@ -57,13 +57,13 @@ public class Players {
         this.pw = pw;
     }
 
-    public Players(String email, String pw, Long currency) {
+    public User(String email, String pw, Long currency) {
         this.email = email;
         this.pw = pw;
         this.currency = currency;
     }
 
-    public Players(){
+    public User(){
 
     }
 
