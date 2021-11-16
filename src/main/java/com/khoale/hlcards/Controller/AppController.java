@@ -29,12 +29,17 @@ public class AppController {
 
     @PostMapping("/process_register")
     public String processRegister(User user) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPw());
-        user.setPw(encodedPassword);
 
-        userRepo.save(user);
+        if(userRepo.findByEmail(user.getEmail()) != null){
+            return "register_fail";
+        }else {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(user.getPw());
+            user.setPw(encodedPassword);
 
-        return "register_success";
+            userRepo.save(user);
+            return "register_success";
+        }
+
     }
 }
