@@ -1,6 +1,11 @@
 package com.khoale.hlcards.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,8 +20,9 @@ public class Cards {
 
     private String rarity;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "cards")
-    Set<User> players;
+    Set<User> users = new HashSet<>();
 
 
     public Integer getId() {
@@ -51,6 +57,14 @@ public class Cards {
         this.rarity = rarity;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void addPlayers(User user) {
+            this.getUsers().add(user);
+    }
+
     public Cards(Integer id, String idol, String png, String rarity) {
         this.id = id;
         this.idol = idol;
@@ -69,4 +83,6 @@ public class Cards {
                 + ", \"rarity\":\"" + rarity + "\""
                 + "}}";
     }
+
+
 }

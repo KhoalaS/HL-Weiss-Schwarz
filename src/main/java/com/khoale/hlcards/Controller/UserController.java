@@ -20,9 +20,4 @@ public class UserController {
         Integer temp = Integer.parseInt(id);
         return userRepo.getById(temp);
     }
-
-    @GetMapping("/players/insert")
-    public void insertQu(){
-        userRepo.save(new User("gds@gmail.com","asdad", 1000L));
-    }
 }

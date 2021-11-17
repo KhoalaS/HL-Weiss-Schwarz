@@ -1,20 +1,28 @@
 package com.khoale.hlcards.Controller;
 
 import com.khoale.hlcards.Entity.Cards;
+import com.khoale.hlcards.Entity.User;
 import com.khoale.hlcards.Repository.CardRepo;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import com.khoale.hlcards.Repository.UserRepo;
+import com.khoale.hlcards.Security.PlayerUserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CardController {
 
     private CardRepo cardRepo;
+    private UserRepo userRepo;
 
-    public CardController(CardRepo cardRepo){
+    public CardController(CardRepo cardRepo, UserRepo userRepo){
         this.cardRepo = cardRepo;
+        this.userRepo = userRepo;
     }
 
     @GetMapping("/cards")
@@ -22,26 +30,20 @@ public class CardController {
         return cardRepo.findAll();
     }
 
-    @GetMapping("/booster")
-    public List<Cards> booster( ){
-        return cardRepo.openBooster(pull_Foil());
-    }
-
     @GetMapping("/cards/{id}")
-    public Cards replaceCard(@RequestBody Cards newCard, @PathVariable Integer id){
-        return cardRepo.findById(id)
-                .map(card -> {
-                    card.setIdol(newCard.getIdol());
-                    card.setPng(newCard.getPng());
-                    card.setRarity(newCard.getRarity());
-                    return cardRepo.save(card);
-                })
-                .orElseGet(()->{
-                    newCard.setId(id);
-                    return cardRepo.save(newCard);
-                });
+    public Optional<Cards> singleCard(@PathVariable Integer id){
+        return cardRepo.findById(id);
     }
 
+    @GetMapping("/booster")
+    public User booster(@AuthenticationPrincipal PlayerUserDetails p_user){
+        List<Cards> c = cardRepo.openBooster(pull_Foil());
+        User user = userRepo.findByEmail(p_user.getUsername()).get(0);
+        user.addCards(c);
+        userRepo.save(user);
+
+        return user;
+    }
 
     public String pull_Foil(){
 

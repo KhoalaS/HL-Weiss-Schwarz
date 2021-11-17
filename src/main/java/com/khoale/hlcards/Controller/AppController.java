@@ -9,28 +9,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Map;
+
 @Controller
 public class AppController {
 
     @Autowired
     private UserRepo userRepo;
 
-    @GetMapping("")
-    public String viewHomePage() {
-        return "index";
-    }
-
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-
         return "signup_form";
     }
 
     @PostMapping("/process_register")
     public String processRegister(User user) {
 
-        if(userRepo.findByEmail(user.getEmail()) != null){
+        if(!userRepo.findByEmail(user.getEmail()).isEmpty()){
             return "register_fail";
         }else {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

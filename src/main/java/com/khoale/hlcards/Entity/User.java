@@ -1,6 +1,9 @@
 package com.khoale.hlcards.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +25,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_ID"),
             inverseJoinColumns = @JoinColumn(name = "card_ID")
     )
-    Set<Cards> cards;
-
+    private Set<Cards> cards = new HashSet<>();
 
     public Long getCurrency() {
         return currency;
@@ -64,7 +66,15 @@ public class User {
     }
 
     public User(){
+        this.currency = 10000L;
+    }
 
+    public Set<Cards> getCards() {
+        return cards;
+    }
+
+    public void addCards(List<Cards> card) {
+            this.getCards().addAll(card);
     }
 
     @Override
