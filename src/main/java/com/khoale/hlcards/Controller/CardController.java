@@ -5,6 +5,7 @@ import com.khoale.hlcards.Entity.User;
 import com.khoale.hlcards.Repository.CardRepo;
 import com.khoale.hlcards.Repository.UserRepo;
 import com.khoale.hlcards.Security.PlayerUserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +18,11 @@ import java.util.Optional;
 @RestController
 public class CardController {
 
+    @Autowired
     private CardRepo cardRepo;
+    @Autowired
     private UserRepo userRepo;
 
-    public CardController(CardRepo cardRepo, UserRepo userRepo){
-        this.cardRepo = cardRepo;
-        this.userRepo = userRepo;
-    }
 
     @GetMapping("/cards")
     public List<Cards>all(){

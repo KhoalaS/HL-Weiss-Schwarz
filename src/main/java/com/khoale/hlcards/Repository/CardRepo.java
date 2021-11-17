@@ -38,4 +38,11 @@ public interface CardRepo extends JpaRepository<Cards, Integer> {
             @Param("rar") String rar
     );
 
+    @Query(value ="SELECT card_id FROM player_deck WHERE user_id = :uid" ,nativeQuery = true)
+    List<Integer> getUsersCards(
+            @Param("uid") Integer uid
+    );
+
+
+
 }
