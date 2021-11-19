@@ -6,3 +6,10 @@ function getInventory(){
                         });
     });
 }
+
+function booster(){
+    $(document).ready(function(){
+        $.get('/booster');
+        setTimeout(() => {getInventory();}, 2000)
+    })
+}

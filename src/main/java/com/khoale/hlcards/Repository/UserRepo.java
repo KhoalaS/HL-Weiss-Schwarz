@@ -15,4 +15,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 
     @Query(value = "SELECT * FROM User WHERE email = :email", nativeQuery = true)
     public List<User> findByEmail(@Param("email") String email);
+
+    @Query(value = "SELECT currency FROM User WHERE email = :email", nativeQuery = true)
+    public List<Long> getCurrency(@Param("email") String email);
 }

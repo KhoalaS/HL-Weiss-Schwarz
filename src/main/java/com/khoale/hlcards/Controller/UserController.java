@@ -26,7 +26,13 @@ public class UserController {
     private CardRepo cardRepo;
 
     @GetMapping("")
-    public String getHome(){
+    public String getHome(Model model,@AuthenticationPrincipal PlayerUserDetails p_user){
+        if(p_user!= null){
+            String email = p_user.getUsername();
+            Long currency = userRepo.getCurrency(email).get(0);
+            model.addAttribute("currency", currency);
+        }else{
+            model.addAttribute("currency", 0);}
         return "user";
     }
 

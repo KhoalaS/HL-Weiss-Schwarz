@@ -1,0 +1,91 @@
+body {
+  font-size: 14px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+#invBox {
+  background: rgba(255,255,255,1);
+  width: 80%;
+  height: 70%;
+  border: 4px solid #26DDE9;
+  box-sizing: border-box;
+  border-radius: 45px;
+  margin: 5% auto;
+}
+
+#invText{
+margin-left: 10%;
+font-family: Spartan;
+font-style: normal;
+font-weight: normal;
+font-size: 4rem;
+line-height: 100%;
+margin-left: 10%;
+/* or 64px */
+
+align-items: center;
+text-align: left;
+
+color: #27C7FF;
+
+mix-blend-mode: normal;
+}
+
+#openBtn{
+background-color: #000000; /* Green */
+  border: none;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  border-radius: 45px;
+  padding: 0.1em;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 4rem;
+  line-height: 100%;
+  /* or 12px */
+
+  align-items: center;
+  text-align: center;
+
+  color: #FFFFFF;
+}
+#openBtn:hover{
+  background-color: white;
+  color: black;
+}
+
+.currency{
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: 100%;
+  margin-right: 5%;
+  /* or 36px */
+
+  text-align: right;
+
+  color: #000000;
+}
+
+.internal{
+  margin-right: 0;
+}
+
+
+@font-face{
+font-family: Montserrat;
+src: url(/fonts/Montserrat-Light.ttf);
+}
+
+@font-face{
+font-family: Spartan;
+src: url(/fonts/Spartan-VariableFont_wght.ttf);
+}
+

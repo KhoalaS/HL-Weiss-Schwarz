@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>User</title>
     <script src="webjars/jquery/jquery.min.js"></script>
     <script src="user.js"></script>
+    <link rel="stylesheet" href="user.css"/>
 </head>
 <body onload="getInventory()">
 
-<ul id="output"></ul>
+<div class="main">
+    <p class="currency">Currency:
+        <span class="currency internal" th:text="${currency}"/>
+    </p>
+    <button id="openBtn" onclick="booster()" >open Booster</button>
+    <p id="invText">inventory</p>
+    <div id="invBox">
+        <ul id="output"></ul>
+    </div>
+</div>
 </body>
 </html>
