@@ -1,24 +1,23 @@
-mainContainer{
+#mainContainer{
     display: flex;
     flex-direction: column;
-    height: 30%;
-    width: 50%;
 }
 
-subContainer{
+#subContainer{
     display: flex;
     flex-direction: row;
 }
 
-mainText1{
+#mainText1{
     font-family: Spartan;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
-    line-height: 100%;
-    
+    font-size: 3.5rem;
     /* or 12px */
     text-align: left;
+
+    margin-top: 12%;
+    margin-left: 5%;
 
     color: #27C7FF;
 
@@ -26,46 +25,49 @@ mainText1{
 
 }
 
-mainText2{
-    width: 30%;
-    height: 1em;
-    margin-left: 5%;
+#mainText2{
+    width: 3.5em;
+    height: 1.2em;
+    margin-left: 8%;
     background: #000000;
     border-radius: 50px;
 
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
-    line-height: 100%;
+    font-size: 3rem;
     text-align: center;
     color: white;
+    
 }
 
-mainText2_1{
+#mainText2_1{
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
-    line-height: 100%;
-    text-align: center;
+    font-size: 3rem;
     color: black;
+    margin-top: 0;
 }
 
 .line{
-    width: 100%;
+    width: 50%;
     height: 0;
     border: 8px solid #4F9FEF;
+    border-radius: 50px;
+    margin-left: 2%;
 }
 
-register{
+#register{
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 36px;
+font-size: 2.5rem;
 line-height: 100%;
 /* or 36px */
-text-align: center;
+text-align: left;
+margin-left: 5%;
+
 
 color: #27C7FF;
 }
@@ -75,10 +77,14 @@ color: #27C7FF;
 
 @font-face{
     font-family: Montserrat;
-    src: url(/fonts/Montserrat-Light.ttf);
+    src: url(/fonts/Montserrat-Medium.ttf);
     }
-    
+
 @font-face{
     font-family: Spartan;
     src: url(/fonts/Spartan-VariableFont_wght.ttf);
+}
+@font-face{
+    font-family: Roboto;
+    src: url(/fonts/Roboto-Light.ttf);
 }
