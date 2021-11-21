@@ -45,7 +45,9 @@ public class CardController {
             userRepo.save(user);
             return ResponseEntity.ok(c);
         }
-        return ResponseEntity.notFound().build();
+        //TODO: changed return for testing
+        return ResponseEntity.ok(cardRepo.openBooster(pull_Foil()));
+        //return ResponseEntity.notFound().build();
     }
 
     public String pull_Foil(){

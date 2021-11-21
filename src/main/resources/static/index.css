@@ -59,17 +59,16 @@
 }
 
 #register{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 2.5rem;
-line-height: 100%;
-/* or 36px */
-text-align: left;
-margin-left: 5%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.5rem;
+    line-height: 100%;
 
+    text-align: left;
+    margin-left: 5%;
 
-color: #27C7FF;
+    color: #27C7FF;
 }
 
 
