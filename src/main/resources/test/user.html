@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="user.js"></script>
+    <link rel="stylesheet" href="user.css"/>
+</head>
+<body onload="getInventory()">
+
+<div id="main">
+    <p class="currency">Currency:
+        <span class="currency internal" th:text="${currency}"/>
+    </p>
+    <button id="openBtn" onclick="booster()" >open Booster</button>
+    <div>
+        <p id="invText">inventory</p>
+        <div id="invBox">
+            <ul id="output"></ul>
+        </div>
+    </div>
+    <button onClick="pop()">Pop me</button>
+</div>
+</body>
+</html>
