@@ -21,23 +21,24 @@ class GalleryItem extends HTMLElement {
 
 customElements.define('gallery-item', GalleryItem);
 
-function getInventoryDepr(){
-    $.getJSON('user/getInv', function (data){
-        $("ul#output > li").remove();
-            $.each(data, function (key, value) {
-                 $("#output").append('<li>' + value.idol + '</li>');
-                        });
-    });
-}
-
 function getInventory(){
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
-        const myObj = JSON.parse(this.responseText);
-        myObj.forEach(populateInv);
-    };
-    xmlhttp.open("GET", "/user/getInv");
-    xmlhttp.send();
+    fetch("/user/getInv")
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            const parent = document.getElementById('invBox')
+            if(parent.children.length != 0){
+                while(parent.firstChild){
+                    parent.removeChild(parent.firstChild)
+                }
+            }
+            data.forEach(populateInv)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
 }
 
 function populateInv(value){
@@ -56,16 +57,10 @@ function populateInv(value){
 }
 
 function booster(){
-    $(document).ready(function(){
-        $.get('/booster');
-        setTimeout(() => {getInventory();}, 2000)
-    })
-}
-
-function pop(){
     let main = document.getElementById("main")
     let p = document.createElement("div");
     p.setAttribute("class", "popUp")
+    p.setAttribute("id", "popUp_1")
 
     let bar = document.createElement('div')
     let title = document.createElement('span')
@@ -74,11 +69,17 @@ function pop(){
     let overlay = document.createElement('div')
 
     overlay.setAttribute("class", "overlay")
+    overlay.setAttribute("id", "overlay")
     close.setAttribute("class", "uiButton")
     cross.setAttribute("class", "icon")
     cross.setAttribute("src", "images/cross.svg")
     title.setAttribute("class", "title")
     close.appendChild(cross)
+    close.addEventListener("click", function(){
+        main.removeChild(p)
+        main.removeChild(overlay)
+        getInventory()
+     })
     title.textContent = 'Result'
     bar.appendChild(title)
     bar.appendChild(close)
@@ -99,15 +100,18 @@ function pop(){
         p.appendChild(top);
     }
 
-    document.querySelector("#main").appendChild(p)
+    main.appendChild(p)
 
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
-      const myObj = JSON.parse(this.responseText);
-      myObj.forEach(populatePopUp);
-    };
-    xmlhttp.open("GET", "/booster");
-    xmlhttp.send();
+    fetch("/booster")
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            data.forEach(populatePopUp)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
 }
 
 function populatePopUp(value, index){
