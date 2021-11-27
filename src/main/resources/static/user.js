@@ -19,10 +19,52 @@ class GalleryItem extends HTMLElement {
 
 }
 
+class FlipImage extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: 'open'});
+
+        const wrapper = document.createElement('div')
+        const card = document.createElement('div')
+        const front = document.createElement('div')
+        const back = document.createElement('div')
+        const img_f = document.createElement('img')
+        const img_b = document.createElement('img')
+        img_f.style.borderRadius = '10px'
+        img_b.style.borderRadius = '10px'
+
+        wrapper.setAttribute('class', 'flip_container')
+        wrapper.setAttribute('part', 'flip_container')
+        wrapper.setAttribute('onClick', 'flip(this)')
+        card.setAttribute('class', 'flip_card')
+        card.setAttribute('part', 'flip_card')
+
+        img_f.setAttribute('src', 'images/placeholder_card.png')
+        img_b.setAttribute('src', '')
+        img_f.setAttribute('width', '100%')
+        img_b.setAttribute('width', '100%')
+        front.setAttribute('class', 'frontImage')
+        back.setAttribute('class', 'backImage')
+        front.setAttribute('part', 'frontImage')
+        back.setAttribute('part', 'backImage')
+        front.appendChild(img_f)
+        back.appendChild(img_b)
+
+        wrapper.appendChild(front)
+        wrapper.appendChild(back)
+
+        card.appendChild(wrapper)
+
+        this.shadowRoot.append(card);
+
+    }
+}
+
+customElements.define('flip-image', FlipImage);
 customElements.define('gallery-item', GalleryItem);
 
 function getInventory(){
-    fetch("/user/getInv")
+    fetch('/user/getInv')
         .then(function(response){
             return response.json()
         })
@@ -56,11 +98,12 @@ function populateInv(value){
     invBox.appendChild(item)
 }
 
+
+//TODO: PopUp Class needed for Readability
 function booster(){
-    let main = document.getElementById("main")
-    let p = document.createElement("div");
-    p.setAttribute("class", "popUp")
-    p.setAttribute("id", "popUp_1")
+    let main = document.getElementById('main')
+    let p = document.createElement('div');
+    p.setAttribute('class', 'popUp')
 
     let bar = document.createElement('div')
     let title = document.createElement('span')
@@ -68,14 +111,14 @@ function booster(){
     let cross = document.createElement('img')
     let overlay = document.createElement('div')
 
-    overlay.setAttribute("class", "overlay")
-    overlay.setAttribute("id", "overlay")
-    close.setAttribute("class", "uiButton")
-    cross.setAttribute("class", "icon")
-    cross.setAttribute("src", "images/cross.svg")
-    title.setAttribute("class", "title")
+    overlay.setAttribute('class', 'overlay')
+    overlay.setAttribute('id', 'overlay')
+    close.setAttribute('class', 'uiButton')
+    cross.setAttribute('class', 'icon')
+    cross.setAttribute('src', 'images/cross.svg')
+    title.setAttribute('class', 'title')
     close.appendChild(cross)
-    close.addEventListener("click", function(){
+    close.addEventListener('click', function(){
         main.removeChild(p)
         main.removeChild(overlay)
         getInventory()
@@ -83,26 +126,20 @@ function booster(){
     title.textContent = 'Result'
     bar.appendChild(title)
     bar.appendChild(close)
-    bar.setAttribute("class", "bar")
+    bar.setAttribute('class', 'bar')
     p.appendChild(bar)
     main.appendChild(overlay)
 
     for(let i = 0; i < 8; i++){
-        let top = document.createElement('div')
-        let a = document.createElement('a')
-        let img = document.createElement('img')
-        img.setAttribute("src", "images/placeholder_card.png")
-        img.setAttribute("id", "card"+i)
-        img.setAttribute("onclick", "swap(this)")
-        a.appendChild(img)
-        top.appendChild(a);
-        top.setAttribute("class", "gallery")
-        p.appendChild(top);
+        const item = document.createElement('flip-image')
+        item.setAttribute('class', 'gallery')
+        item.setAttribute('id', 'card'+i)
+        p.appendChild(item)
     }
 
-    main.appendChild(p)
+   main.appendChild(p)
 
-    fetch("/booster")
+    fetch('/booster')
         .then(function(response){
             return response.json()
         })
@@ -115,11 +152,21 @@ function booster(){
 }
 
 function populatePopUp(value, index){
-    let card = document.getElementById("card"+index)
-    card.setAttribute("iSwap", "images/"+value.png)
+    const card = document.getElementById('card'+index)
+    const shadow = card.shadowRoot
+    const flipcard = shadow.querySelector('.flip_card')
+    const container = flipcard.querySelector('.flip_container')
+    const div = container.querySelector('.backImage')
+    const img_b = div.querySelector('img')
+    img_b.setAttribute('src', 'images/'+ value.png)
 }
 
 function swap(e){
-    var uImg = e.getAttribute("iSwap")
-    e.setAttribute("src", uImg)
+    var uImg = e.getAttribute('iSwap')
+    e.setAttribute('src', uImg)
 }
+
+function flip(e){
+    e.setAttribute('part', 'flip_container flip_container_active')
+}
+
