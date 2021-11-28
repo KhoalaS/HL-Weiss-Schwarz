@@ -29,9 +29,10 @@ public interface CardRepo extends JpaRepository<Cards, Integer> {
     );
 
     @Query(value =
-            "(SELECT * FROM cards WHERE rarity='C' ORDER BY RAND () LIMIT 4) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity='C' ORDER BY RAND () LIMIT 3) UNION ALL" +
             "(SELECT * FROM cards WHERE rarity='U' ORDER BY RAND () LIMIT 2) UNION ALL" +
             "(SELECT * FROM cards WHERE rarity='R' ORDER BY RAND () LIMIT 1) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity='CC' ORDER BY RAND () LIMIT 1) UNION ALL" +
             "(SELECT * FROM cards WHERE rarity= :rar ORDER BY RAND () LIMIT 1)", nativeQuery = true
     )
     List<Cards> openBooster(
