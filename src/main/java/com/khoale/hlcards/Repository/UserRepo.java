@@ -13,9 +13,9 @@ import java.util.List;
 @Transactional
 public interface UserRepo extends JpaRepository<UserData, Integer> {
 
-    @Query(value = "SELECT * FROM User WHERE email = :email", nativeQuery = true)
+    @Query(value = "SELECT * FROM UserData WHERE email = :email", nativeQuery = true)
     public List<UserData> findByEmail(@Param("email") String email);
 
-    @Query(value = "SELECT currency FROM User WHERE email = :email", nativeQuery = true)
+    @Query(value = "SELECT currency FROM UserData WHERE email = :email", nativeQuery = true)
     public List<Long> getCurrency(@Param("email") String email);
 }
