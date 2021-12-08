@@ -19,12 +19,12 @@ public class User {
 
     private Long currency;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "player_deck",
             joinColumns = @JoinColumn(name = "user_ID"),
             inverseJoinColumns = @JoinColumn(name = "card_ID")
-    )
+    )*/
     private Set<Cards> cards = new HashSet<>();
 
     public Long getCurrency() {
