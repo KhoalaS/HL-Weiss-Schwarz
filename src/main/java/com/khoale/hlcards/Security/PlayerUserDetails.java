@@ -2,15 +2,15 @@ package com.khoale.hlcards.Security;
 
 import java.util.Collection;
 
-import com.khoale.hlcards.Entity.User;
+import com.khoale.hlcards.Entity.UserData;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class PlayerUserDetails implements UserDetails {
 
-    private User user;
+    private UserData user;
 
-    public PlayerUserDetails(User user) {
+    public PlayerUserDetails(UserData user) {
         this.user = user;
     }
 

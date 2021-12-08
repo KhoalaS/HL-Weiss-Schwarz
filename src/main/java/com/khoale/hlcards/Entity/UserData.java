@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User {
+public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
@@ -19,10 +19,10 @@ public class User {
 
     private Long currency;
 
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "player_deck",
-            joinColumns = @JoinColumn(name = "user_ID"),
+            joinColumns = @JoinColumn(name = "u_ID"),
             inverseJoinColumns = @JoinColumn(name = "card_ID")
     )
     private Set<Cards> cards = new HashSet<>();
@@ -59,13 +59,13 @@ public class User {
         this.pw = pw;
     }
 
-    public User(String email, String pw, Long currency) {
+    public UserData(String email, String pw, Long currency) {
         this.email = email;
         this.pw = pw;
         this.currency = currency;
     }
 
-    public User(){
+    public UserData(){
         this.currency = 10000L;
     }
 

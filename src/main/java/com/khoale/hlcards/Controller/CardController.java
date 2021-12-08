@@ -1,7 +1,7 @@
 package com.khoale.hlcards.Controller;
 
 import com.khoale.hlcards.Entity.Cards;
-import com.khoale.hlcards.Entity.User;
+import com.khoale.hlcards.Entity.UserData;
 import com.khoale.hlcards.Repository.CardRepo;
 import com.khoale.hlcards.Repository.UserRepo;
 import com.khoale.hlcards.Security.PlayerUserDetails;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +39,7 @@ public class CardController {
     public ResponseEntity<List<Cards>> booster(@AuthenticationPrincipal PlayerUserDetails p_user, Model model){
         if(p_user != null){
             List<Cards> c = cardRepo.openBooster(pull_Foil());
-            User user = userRepo.findByEmail(p_user.getUsername()).get(0);
+            UserData user = userRepo.findByEmail(p_user.getUsername()).get(0);
             user.addCards(c);
             userRepo.save(user);
             return ResponseEntity.ok(c);

@@ -1,7 +1,7 @@
 package com.khoale.hlcards.Controller;
 
 import com.khoale.hlcards.Entity.Cards;
-import com.khoale.hlcards.Entity.User;
+import com.khoale.hlcards.Entity.UserData;
 import com.khoale.hlcards.Repository.CardRepo;
 import com.khoale.hlcards.Repository.UserRepo;
 import com.khoale.hlcards.Security.PlayerUserDetails;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,7 +39,7 @@ public class UserController {
     @GetMapping("/getInv")
     public ResponseEntity<List<Cards>> userWindow(Model model, @AuthenticationPrincipal PlayerUserDetails p_user){
         if(p_user!=null){
-            User user = userRepo.findByEmail(p_user.getUsername()).get(0);
+            UserData user = userRepo.findByEmail(p_user.getUsername()).get(0);
             List<Integer> l = cardRepo.getUsersCards(user.getUid());
             return ResponseEntity.ok(cardRepo.findAllById(l));
         }

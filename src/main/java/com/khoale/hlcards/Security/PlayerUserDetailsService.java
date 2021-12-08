@@ -1,6 +1,6 @@
 package com.khoale.hlcards.Security;
 
-import com.khoale.hlcards.Entity.User;
+import com.khoale.hlcards.Entity.UserData;
 import com.khoale.hlcards.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,7 @@ public class PlayerUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByEmail(username).get(0);
+        UserData user = userRepo.findByEmail(username).get(0);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
