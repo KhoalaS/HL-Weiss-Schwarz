@@ -19,12 +19,12 @@ public class User {
 
     private Long currency;
 
-    /*@ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "player_deck",
             joinColumns = @JoinColumn(name = "user_ID"),
             inverseJoinColumns = @JoinColumn(name = "card_ID")
-    )*/
+    )
     private Set<Cards> cards = new HashSet<>();
 
     public Long getCurrency() {
@@ -71,6 +71,10 @@ public class User {
 
     public Set<Cards> getCards() {
         return cards;
+    }
+
+    public void setCards(Set<Cards> cards) {
+        this.cards = cards;
     }
 
     public void addCards(List<Cards> card) {
