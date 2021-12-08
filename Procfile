@@ -1,0 +1,1 @@
+web: java -Dserver.port=55556  -jar build/libs/hlcards-0.0.1-SNAPSHOT.jar
