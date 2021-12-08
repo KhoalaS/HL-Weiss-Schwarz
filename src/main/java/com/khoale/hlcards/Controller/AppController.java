@@ -17,6 +17,11 @@ public class AppController {
     @Autowired
     private UserRepo userRepo;
 
+    @GetMapping("/")
+    public String home(Model model) {
+        return "index.html";
+    }
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
