@@ -11,29 +11,29 @@ import java.util.List;
 @Repository
 public interface CardRepo extends JpaRepository<Cards, Integer> {
 
-    @Query(value="SELECT png FROM cards WHERE rarity='SSP' ORDER BY RAND () LIMIT 1", nativeQuery = true)
+    @Query(value="SELECT png FROM cards WHERE rarity='SSP' ORDER BY RANDOM () LIMIT 1", nativeQuery = true)
     String getRandom_SSP();
 
-    @Query(value="SELECT png FROM cards WHERE rarity='C' ORDER BY RAND () LIMIT 4", nativeQuery = true)
+    @Query(value="SELECT png FROM cards WHERE rarity='C' ORDER BY RANDOM () LIMIT 4", nativeQuery = true)
     List<String> getRandom_C();
 
-    @Query(value="SELECT png FROM cards WHERE rarity='U' ORDER BY RAND () LIMIT 2", nativeQuery = true)
+    @Query(value="SELECT png FROM cards WHERE rarity='U' ORDER BY RANDOM () LIMIT 2", nativeQuery = true)
     List<String> getRandom_U();
 
-    @Query(value="SELECT * FROM cards WHERE rarity='R' ORDER BY RAND () LIMIT 1", nativeQuery = true)
+    @Query(value="SELECT * FROM cards WHERE rarity='R' ORDER BY RANDOM () LIMIT 1", nativeQuery = true)
     List<Object[]> getRandom_R();
 
-    @Query(value="SELECT png FROM cards WHERE rarity=rar ORDER BY RAND () LIMIT 1", nativeQuery = true)
+    @Query(value="SELECT png FROM cards WHERE rarity=rar ORDER BY RANDOM () LIMIT 1", nativeQuery = true)
     String getRandom_Foil(
             @Param("rar") String rar
     );
 
     @Query(value =
-            "(SELECT * FROM cards WHERE rarity='C' ORDER BY RAND () LIMIT 3) UNION ALL" +
-            "(SELECT * FROM cards WHERE rarity='U' ORDER BY RAND () LIMIT 2) UNION ALL" +
-            "(SELECT * FROM cards WHERE rarity='R' ORDER BY RAND () LIMIT 1) UNION ALL" +
-            "(SELECT * FROM cards WHERE rarity='CC' ORDER BY RAND () LIMIT 1) UNION ALL" +
-            "(SELECT * FROM cards WHERE rarity= :rar ORDER BY RAND () LIMIT 1)", nativeQuery = true
+            "(SELECT * FROM cards WHERE rarity='C' ORDER BY RANDOM () LIMIT 3) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity='U' ORDER BY RANDOM () LIMIT 2) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity='R' ORDER BY RANDOM () LIMIT 1) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity='CC' ORDER BY RANDOM () LIMIT 1) UNION ALL" +
+            "(SELECT * FROM cards WHERE rarity= :rar ORDER BY RANDOM () LIMIT 1)", nativeQuery = true
     )
     List<Cards> openBooster(
             @Param("rar") String rar
